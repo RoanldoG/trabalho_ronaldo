@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>Trabalho AngularJs - Ronaldo</title>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+	<script type="text/javascript" src="vendor/angularjs/angular.js"></script>
+
+	<script type="text/javascript" src="js/myApp.js"></script>
+	<script type="text/javascript" src="js/controller/MeuController.js"></script>
+
+</head>
+<body ng-controller="MeuController">
+	<div class="container">
+		<div class="col-xs-12">
+			<h1>{{isEdit ? 'Cadastro - Edição' : 'Cadastro'}}</h1>
+
+			<div class="row">
+				<div class="col-xs-4">
+
+					<form ng-submit="enviaDados(pessoa)">
+						<div class="form-group">
+							<label for="">Nome</label>
+							<input required minlength="3" ng-model="pessoa.nome" type="text" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="">Telefone</label>
+							<input required minlength="8" ng-model="pessoa.telefone" type="text" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="">E-mail</label>
+							<input required ng-model="pessoa.email" type="email" class="form-control">
+						</div>
+
+						<button ng-show="!!isVisible" ng-click="cancelaDados($index)" class="btn btn-danger pull-right">Cancelar</button>
+
+						<button type="submit" class="btn btn-success pull-right">{{txtBtn}}</button>
+
+						<br><br><H4 ng-show="!!isVisible"> Aviso: Os dados resão salvos automaticamete.</H4>
+
+					</form>
+
+				</div> <!-- ROW - class="col-xs-4" -->
+
+				<br>
+
+				<div class="col-xs-8">
+
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<!-- <th>ID</th> -->
+								<th>Nome</th>
+								<th>Telefone</th>
+								<th>E-mail</th>
+								<th>Opções</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in dados">
+								<!-- <td>{{$index + 1}}</td> -->
+								<td>{{item.nome}}</td>
+								<td>{{item.telefone}}</td>
+								<td>{{item.email}}</td>
+								<td>						
+									<button ng-click="editarDados(item, $index)" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button> 
+
+									<button ng-click="excluirDados($index)" ng-submit="enviaDados" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div> <!-- class="col-xs-8" -->
+		</div> <!-- class="col-xs-12" -->
+
+	</div>
+</body>
+</html>
